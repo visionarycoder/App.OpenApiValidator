@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using vs.OpenApiValidator.Services;
-using vs.OpenApiValidator.Services.Contracts;
+using vc.OpenApiValidator;
+using vc.OpenApiValidator.Contracts;
 
 var host = Host
     .CreateDefaultBuilder(args)
@@ -15,3 +14,6 @@ var host = Host
 
 var app = host.Services.GetRequiredService<IClient>();
 return app.Run(args);
+
+
+///  Wxt{`6(rgq,%~Pfw

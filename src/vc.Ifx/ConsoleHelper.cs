@@ -1,73 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace vc.Ifx;
+﻿namespace vc.Ifx;
 
 public static class ConsoleHelper
 {
 
-    public static (bool printUsage, string filePath, bool showWarnings) TryParseArguments(string[] args)
+    public static RuntimeArguments TryParseArguments(string[] args)
     {
 
-        var specPath = string.Empty;
-        var showWarnings = false;
-        var printUsage = false;
+        var runtimeArguments = new RuntimeArguments();
 
         // If no arguments, or user wants help
-        if(args.Length == 0)
+        if (args.Length == 0)
         {
-            printUsage = true;
+            runtimeArguments.PrintUsage = true;
+            return runtimeArguments;
         }
-        else
-        {
 
-            // We’ll loop through args and check for flags
-            for(var i = 0; i < args.Length; i++)
+        // We’ll loop through args and check for flags
+        for (var i = 0; i < args.Length; i++)
+        {
+            var arg = args[i].Trim();
+            // Check if it's a flag
+            if (arg.Equals("-f", StringComparison.OrdinalIgnoreCase) || arg.Equals("--file", StringComparison.OrdinalIgnoreCase))
             {
-                var arg = args[i].Trim();
-                // Check if it's a flag
-                if(arg.Equals("-f", StringComparison.OrdinalIgnoreCase) || arg.Equals("--file", StringComparison.OrdinalIgnoreCase))
+                if (i + 1 >= args.Length)
                 {
-                    if(i + 1 >= args.Length)
-                    {
-                        Console.Error.WriteLine("Error: Missing file path after '-f'/'--file'.");
-                        break;
-                    }
-                    specPath = args[++i];
+                    runtimeArguments.PrintUsage = true;
+                    runtimeArguments.Errors.Add("Error: Missing file path after '-f'/'--file'.");
+                    return runtimeArguments;
                 }
-                else if(arg.Equals("-w", StringComparison.OrdinalIgnoreCase) || arg.Equals("--show-warnings", StringComparison.OrdinalIgnoreCase))
+                runtimeArguments.FilePath = args[++i];
+            }
+            else if (arg.Equals("-w", StringComparison.OrdinalIgnoreCase) || arg.Equals("--show-warnings", StringComparison.OrdinalIgnoreCase))
+            {
+                runtimeArguments.ShowWarnings = true;
+            }
+            else
+            {
+                // If it's not a recognized flag, assume it's the file path
+                // (if user just typed: OpenApiValidator.exe myspec.yaml)
+                if (string.IsNullOrEmpty(runtimeArguments.FilePath))
                 {
-                    showWarnings = true;
+                    runtimeArguments.FilePath = arg;
                 }
                 else
                 {
-                    // If it's not a recognized flag, assume it's the file path
-                    // (if user just typed: OpenApiValidator.exe myspec.yaml)
-                    if(string.IsNullOrEmpty(specPath))
-                    {
-                        specPath = arg;
-                    }
-                    else
-                    {
-                        // We already have a file path, so this is unexpected
-                        Console.Error.WriteLine($"Unrecognized argument: {arg}");
-                    }
+                    // We already have a file path, so this is unexpected
+                    runtimeArguments.Errors.Add($"Unrecognized argument: {arg}");
                 }
-            }
-
-            // At minimum, we need a spec file
-            if(string.IsNullOrEmpty(specPath))
-            {
-                Console.Error.WriteLine("Error: No OpenAPI file path was provided.");
             }
         }
 
-        return (printUsage, specPath, showWarnings);
+        // At minimum, we need a spec file
+        if (string.IsNullOrEmpty(runtimeArguments.FilePath))
+        {
+            runtimeArguments.Errors.Add("Error: No OpenAPI file path was provided.");
+        }
+        return runtimeArguments;
 
     }
+
     public static void PrintUsage()
     {
         Console.WriteLine("Usage:");
@@ -82,5 +73,14 @@ public static class ConsoleHelper
         Console.WriteLine("  OpenApiValidator.exe myApi.yaml");
         Console.WriteLine("  OpenApiValidator.exe -f myApi.json --show-warnings");
     }
+
 }
 
+public class RuntimeArguments
+{
+    public string FilePath { get; set; } = string.Empty;
+    public bool ShowWarnings { get; set; }
+    public bool PrintUsage { get; set; }
+    public bool HasErrors => Errors.Count > 0;
+    public ICollection<string> Errors { get; } = new List<string>();
+}

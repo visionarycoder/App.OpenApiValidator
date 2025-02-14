@@ -1,6 +1,6 @@
-﻿namespace vs.OpenApiValidator.Services.Contracts;
+﻿namespace vc.OpenApiValidator.Contracts;
 
 public interface IOpenApiValidator
 {
-    void Validate(string filePath, bool showWarnings);
+    Task<ValidationResult> Validate(string filePath);
 }

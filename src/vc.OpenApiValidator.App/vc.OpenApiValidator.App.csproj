@@ -2,10 +2,11 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+        <!--<TargetFrameworks>net8.0;net9.0</TargetFrameworks>-->
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>vc.OpenApiValidatory</RootNamespace>
+        <RootNamespace>vc.OpenApiValidator</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,6 +1,6 @@
-﻿namespace vs.OpenApiValidator.Services.Contracts;
+﻿namespace vc.OpenApiValidator.Contracts;
 
 public interface IClient
 {
-    int Run(string[] args);
+    Task Run(string[] args);
 }

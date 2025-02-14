@@ -1,42 +1,40 @@
 ﻿using Microsoft.OpenApi.Readers;
+using vc.OpenApiValidator.Contracts;
 
-using vs.OpenApiValidator.Services.Contracts;
+namespace vc.OpenApiValidator;
 
-namespace vs.OpenApiValidator.Services;
-
-public class OpenApiValidator(IConsole console) : IOpenApiValidator
+public class OpenApiValidator : IOpenApiValidator
 {
 
-    public void Validate(string filePath, bool showWarnings)
+    public async Task<ValidationResult> Validate(string filePath)
     {
     
-        using var stream = File.OpenRead(filePath);
+        var result = new ValidationResult();
+        var fi = new FileInfo(filePath);
+        if (!fi.Exists)
+        {
+            result.ErrorMessages.Add($"OpenAPI spec file not found: {filePath}");
+            return result;
+        }
+
+        await using var stream = fi.OpenRead();
         var openApiDoc = new OpenApiStreamReader().Read(stream, out var diagnostic);
 
         if(openApiDoc == null || diagnostic.Errors.Count > 0)
         {
-
-            console.WriteLine("OpenAPI document has errors:");
             foreach(var error in diagnostic.Errors)
             {
-                console.WriteLine($"- {error.Message}");
+                result.ErrorMessages.Add(error.Message);
             }
-            throw new InvalidOperationException("OpenAPI spec is invalid.");
-
+            return result;
         }
 
-        console.WriteLine("OpenAPI document is valid!");
-
-        if(showWarnings && diagnostic.Warnings.Count > 0)
+        result.Messages.Add("OpenAPI document is valid!");
+        foreach(var warning in diagnostic.Warnings.Where(i => i != null))
         {
-
-            console.WriteLine("\nWarnings:");
-            foreach(var warning in diagnostic.Warnings)
-            {
-                console.WriteLine($"- {warning}");
-            }
-
+            result.WarningMessages.Add($"{warning}");
         }
+        return result;
 
     }
 

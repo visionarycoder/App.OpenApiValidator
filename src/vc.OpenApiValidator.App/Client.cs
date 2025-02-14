@@ -1,47 +1,46 @@
 ﻿using vc.Ifx;
-using vs.OpenApiValidator.Services.Contracts;
+using vc.OpenApiValidator.Contracts;
 
-namespace vs.OpenApiValidator.Services;
+namespace vc.OpenApiValidator;
 
 public class Client(IOpenApiValidator validator) : IClient
 {
 
-    public int Run(string[] args)
+    public async Task Run(string[] args)
     {
 
         try
         {
-            var (printUsage, filePath, showWarnings) = ConsoleHelper.TryParseArguments(args);
 
-            if(printUsage)
+            var runtimeArguments = ConsoleHelper.TryParseArguments(args);
+            if(runtimeArguments.PrintUsage)
             {
-                PrintUsage();
-                return 1;
+                ConsoleHelper.PrintUsage();
+                return;
             }
 
-            var fi = new FileInfo(filePath);
+            var fi = new FileInfo(runtimeArguments.FilePath);
             if(!fi.Exists)
             {
-                Console.Error.WriteLine($"Error: File not found at '{specPath}'.");
-                return 1;
+                await Console.Error.WriteLineAsync($"Error: File not found at '{runtimeArguments.FilePath}'.");
+                return;
             }
 
-            validator.Validate(specPath, showWarnings);
-            return 0;
+            var validationResults = await validator.Validate(runtimeArguments.FilePath);
+            if (validationResults.HasErrors)
+            {
+                foreach (var error in validationResults.ErrorMessages)
+                {
+                    await Console.Error.WriteLineAsync($"Error: {error}");
+                }
+            }
 
         }
         catch(Exception ex)
         {
-
-            Console.Error.WriteLine($"Validation failed: {ex.Message}");
-            return 1;
-
+            await Console.Error.WriteLineAsync($"Validation failed: {ex.Message}");
         }
 
     }
-
-   
-
-    
 
 }

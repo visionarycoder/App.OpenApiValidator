@@ -40,11 +40,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{05DE
 		.github\copilot-instructions.md = .github\copilot-instructions.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vc.OpenApiValidator.App", "src\vc.OpenApiValidator.App\vc.OpenApiValidator.App.csproj", "{1A51C578-F3F1-4A3A-A3AA-2D658344B17A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vc.OpenApiValidator.App", "src\vc.OpenApiValidator.App\vc.OpenApiValidator.App.csproj", "{1A51C578-F3F1-4A3A-A3AA-2D658344B17A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vc.OpenApiValidator.Services", "src\vc.OpenApiValidator.Services\vc.OpenApiValidator.Services.csproj", "{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vc.OpenApiValidator.Services", "src\vc.OpenApiValidator.Services\vc.OpenApiValidator.Services.csproj", "{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vc.Ifx", "src\vc.Ifx\vc.Ifx.csproj", "{C54E5D54-95A6-4543-A58C-02EC15A2F222}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vc.Ifx", "src\vc.Ifx\vc.Ifx.csproj", "{C54E5D54-95A6-4543-A58C-02EC15A2F222}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,7 +75,7 @@ Global
 		{C54E5D54-95A6-4543-A58C-02EC15A2F222} = {3741D3DB-4135-424B-8F3D-93DDC38B39F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {21F0F0A0-DB77-4D0D-834D-3863113E788A}
 		FileExplorer = docs\|gfx\|src\|tests\
+		SolutionGuid = {21F0F0A0-DB77-4D0D-834D-3863113E788A}
 	EndGlobalSection
 EndGlobal

@@ -27,11 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 		tests\UnitTests\ReadMe.md = tests\UnitTests\ReadMe.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{F58980E1-CEAD-4DD1-A533-33A5403ABA49}"
-	ProjectSection(SolutionItems) = preProject
-		tests\IntegrationTests\ReadMe.md = tests\IntegrationTests\ReadMe.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EBB4AC2B-AE42-4637-B6D7-AE92C85DC09F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -45,16 +40,42 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{05DE
 		.github\copilot-instructions.md = .github\copilot-instructions.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vc.OpenApiValidator.App", "src\vc.OpenApiValidator.App\vc.OpenApiValidator.App.csproj", "{1A51C578-F3F1-4A3A-A3AA-2D658344B17A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vc.OpenApiValidator.Services", "src\vc.OpenApiValidator.Services\vc.OpenApiValidator.Services.csproj", "{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vc.Ifx", "src\vc.Ifx\vc.Ifx.csproj", "{C54E5D54-95A6-4543-A58C-02EC15A2F222}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A51C578-F3F1-4A3A-A3AA-2D658344B17A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A51C578-F3F1-4A3A-A3AA-2D658344B17A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A51C578-F3F1-4A3A-A3AA-2D658344B17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A51C578-F3F1-4A3A-A3AA-2D658344B17A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54E5D54-95A6-4543-A58C-02EC15A2F222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54E5D54-95A6-4543-A58C-02EC15A2F222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54E5D54-95A6-4543-A58C-02EC15A2F222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54E5D54-95A6-4543-A58C-02EC15A2F222}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B5599B04-96C4-438F-88EC-FA10B23A808F} = {EC33CD90-8AA7-4103-A8FA-28D8DC3C7C7B}
-		{F58980E1-CEAD-4DD1-A533-33A5403ABA49} = {EC33CD90-8AA7-4103-A8FA-28D8DC3C7C7B}
+		{1A51C578-F3F1-4A3A-A3AA-2D658344B17A} = {3741D3DB-4135-424B-8F3D-93DDC38B39F5}
+		{C8A31639-46BC-4D0A-B4FC-D1A68827A6D2} = {3741D3DB-4135-424B-8F3D-93DDC38B39F5}
+		{C54E5D54-95A6-4543-A58C-02EC15A2F222} = {3741D3DB-4135-424B-8F3D-93DDC38B39F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = docs\|gfx\|src\|tests\
 		SolutionGuid = {21F0F0A0-DB77-4D0D-834D-3863113E788A}
+		FileExplorer = docs\|gfx\|src\|tests\
 	EndGlobalSection
 EndGlobal

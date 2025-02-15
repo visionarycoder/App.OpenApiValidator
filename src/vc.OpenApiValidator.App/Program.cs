@@ -14,6 +14,3 @@ var host = Host
 
 var app = host.Services.GetRequiredService<IClient>();
 return app.Run(args);
-
-
-///  Wxt{`6(rgq,%~Pfw
